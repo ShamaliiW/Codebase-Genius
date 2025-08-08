@@ -1,1 +1,11 @@
 python-dotenv
+jaclang
+jac-cloud
+jac-streamlit
+mtllm
+langchain
+langchain-community
+python-dotenv
+langchain
+langgraph
+langchain-groq
