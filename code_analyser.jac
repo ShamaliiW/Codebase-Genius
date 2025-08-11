@@ -1,54 +1,38 @@
-import from mtllm.llm {Model}
+actor repo_analyzer:
+    // Property to store the repository data
+    property repo_dir: "cloned_repo"
 
-glob llm = Model(model_name="groq/llama3-8b-8192");
+    // Action to analyze the repository
+    action analyze_repo:
+        // For simplicity, we'll simulate reading files in the repository directory
+        // This is a simplified model. In practice, you'd need data already loaded in memory.
 
-node Equipment {}
+        // Simulate repository files (In practice, this could come from a database or pre-loaded data)
+        files = ["script1.py", "README.md", "script2.py", "requirements.txt"]
+        
+        jac_files = 0
+        readme_files = 0
+        
+        // Loop through files and count relevant ones
+        for f in files:
+            if f.ends_with(".jac"):
+                jac_files += 1
+            if f == "README.md":
+                readme_files += 1
 
-node Weights(Equipment) {
-    has available: bool = False;
+        // Generate the analysis result
+        result = "Total Jac files found: " + jac_files.str() + "\n" +
+                 "Total README files found: " + readme_files.str() + "\n"
 
-    can check with FitnessAgent entry {
-        visitor.gear["weights"] = self.available;
-    }
-}
+        // Output the result
+        return result
 
-node Cardio(Equipment) {
-    has machine: str = "treadmill";
+    // Action to simulate saving the analysis report
+    action save_report:
+        result = analyze_repo()
+        // Here you'd typically save it to a database or file
+        print("Saving Analysis Report:")
+        print(result)
 
-    can check with FitnessAgent entry {
-        visitor.gear["cardio"] = self.machine;
-    }
-}
-
-node Trainer {
-    can plan with FitnessAgent entry {
-        visitor.gear["workout"] = visitor.create_workout(visitor.gear);
-    }
-}
-
-walker FitnessAgent {
-    has gear: dict = {};
-
-    can start with `root entry {
-        visit [-->(`?Equipment)];
-    }
-
-    """Create a personalized workout plan based on available equipment and space."""
-    def create_workout(gear: dict) -> str by llm();
-}
-
-walker CoachWalker(FitnessAgent) {
-    can get_plan with `root entry {
-        visit [-->(`?Trainer)];
-    }
-}
-
-with entry {
-    root ++> Weights();
-    root ++> Cardio();
-    root ++> Trainer();
-
-    agent = CoachWalker() spawn root;
-    print("Your Workout Plan:");
-    print(agent.gear['workout']);
-}
+    // Call to save the analysis report
+    save_report()
