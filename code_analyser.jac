@@ -1,54 +1,31 @@
-import from mtllm.llm {Model}
+actor repo_analyzer:
+    
+    property repo_dir: "cloned_repo"
+    
+    action analyze_repo:
+        
+        files = ["script1.jac", "README.md", "script2.jac", "requirements.txt"]
+        
+        jac_files = 0
+        readme_files = 0
+        
+        for f in files:
+            if f.ends_with(".jac"):
+                jac_files += 1
+            if f == "README.md":
+                readme_files += 1
 
-glob llm = Model(model_name="groq/llama3-8b-8192");
+        
+        result = "Total Jac files found: " + jac_files.str() + "\n" +
+                 "Total README files found: " + readme_files.str() + "\n"
 
-node Equipment {}
+        
+        return result
 
-node Weights(Equipment) {
-    has available: bool = False;
+    action save_report:
+        result = analyze_repo()
+        print("Saving Analysis Report:")
+        print(result)
 
-    can check with FitnessAgent entry {
-        visitor.gear["weights"] = self.available;
-    }
-}
-
-node Cardio(Equipment) {
-    has machine: str = "treadmill";
-
-    can check with FitnessAgent entry {
-        visitor.gear["cardio"] = self.machine;
-    }
-}
-
-node Trainer {
-    can plan with FitnessAgent entry {
-        visitor.gear["workout"] = visitor.create_workout(visitor.gear);
-    }
-}
-
-walker FitnessAgent {
-    has gear: dict = {};
-
-    can start with `root entry {
-        visit [-->(`?Equipment)];
-    }
-
-    """Create a personalized workout plan based on available equipment and space."""
-    def create_workout(gear: dict) -> str by llm();
-}
-
-walker CoachWalker(FitnessAgent) {
-    can get_plan with `root entry {
-        visit [-->(`?Trainer)];
-    }
-}
-
-with entry {
-    root ++> Weights();
-    root ++> Cardio();
-    root ++> Trainer();
-
-    agent = CoachWalker() spawn root;
-    print("Your Workout Plan:");
-    print(agent.gear['workout']);
-}
+    
+    save_report()
