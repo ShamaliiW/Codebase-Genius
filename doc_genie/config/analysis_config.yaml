@@ -1,0 +1,102 @@
+# GitHub Codebase Analyzer - Configuration
+
+analysis:
+  depth: "full"  # Options: basic, full, files_only
+  max_files: 1000
+  excluded_extensions:
+    - ".png"
+    - ".jpg"
+    - ".jpeg"
+    - ".gif"
+    - ".bmp"
+    - ".ico"
+    - ".svg"
+    - ".pdf"
+    - ".doc"
+    - ".docx"
+    - ".xls"
+    - ".xlsx"
+    - ".zip"
+    - ".tar"
+    - ".gz"
+    - ".rar"
+    - ".7z"
+  
+  excluded_directories:
+    - "node_modules"
+    - ".git"
+    - ".vscode"
+    - "__pycache__"
+    - ".pytest_cache"
+    - "venv"
+    - "env"
+    - "target"
+    - "build"
+    - "dist"
+    - ".idea"
+
+github:
+  api_base_url: "https://api.github.com"
+  rate_limit_delay: 1  # seconds between API calls
+  max_retries: 3
+  timeout: 30  # seconds
+
+output:
+  directory: "output"
+  formats:
+    - "markdown"
+    - "json"
+    - "html"
+  
+  uml:
+    generate_use_case: true
+    generate_class_diagram: true
+    generate_component_diagram: true
+    generate_sequence_diagram: true
+    generate_deployment_diagram: true
+  
+  api:
+    generate_openapi: true
+    generate_postman_collection: true
+    include_examples: true
+
+documentation:
+  include_readme: true
+  include_setup_instructions: true
+  include_architecture_docs: true
+  include_api_docs: true
+  include_dependency_analysis: true
+  include_technology_stack: true
+  include_requirements_analysis: true
+  include_code_metrics: true
+
+analysis_rules:
+  complexity:
+    max_cyclomatic_complexity: 10
+    warn_on_high_complexity: true
+  
+  dependencies:
+    check_security_vulnerabilities: true
+    check_outdated_packages: true
+    analyze_licenses: true
+  
+  architecture:
+    detect_patterns: true
+    analyze_coupling: true
+    analyze_cohesion: true
+
+templates:
+  readme_sections:
+    - "overview"
+    - "architecture"
+    - "technologies"
+    - "requirements"
+    - "setup"
+    - "api"
+    - "testing"
+    - "metrics"
+    - "diagrams"
+    - "contributing"
+  
+  api_doc_format: "openapi_3.0"
+  uml_format: "plantuml"

@@ -1,0 +1,42 @@
+{
+  "name": "github-codebase-analyzer",
+  "version": "1.0.0",
+  "description": "A comprehensive GitHub codebase analyzer built with Jac and Jaseci",
+  "main": "src/main.jac",
+  "scripts": {
+    "start": "jac run src/main.jac",
+    "test": "jac run tests/test_analyzer.jac",
+    "analyze": "jac run src/main.jac",
+    "generate-docs": "jac run generators/documentation_generator.jac"
+  },
+  "keywords": [
+    "github",
+    "codebase-analysis",
+    "documentation-generation",
+    "jac",
+    "jaseci",
+    "uml",
+    "api-documentation",
+    "architecture-analysis"
+  ],
+  "author": "GitHub Codebase Analyzer Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/github-codebase-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/github-codebase-analyzer/issues"
+  },
+  "homepage": "https://github.com/your-username/github-codebase-analyzer#readme",
+  "engines": {
+    "jaseci": ">=1.4.0",
+    "python": ">=3.8"
+  },
+  "dependencies": {
+    "jaseci": "^1.4.0"
+  },
+  "devDependencies": {
+    "pytest": "^7.2.0"
+  }
+}

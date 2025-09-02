@@ -1,7 +1,7 @@
-
-import from mtllm.llm {Model}
+import from byllm.llm {Model}
 import os;
 import subprocess;
+
 
 # Global LLM
 glob llm = Model(model_name="groq/meta-llama/llama-4-maverick-17b-128e-instruct");
@@ -174,6 +174,6 @@ walker SupervisorAgent {
 
 # Run 
 with entry {
-    supervisor = SupervisorAgent(path="https://github.com/jaseci-labs/jaclang.git") spawn root;
+    supervisor = SupervisorAgent(path="https://github.com/DinalieLiyanage/geveoFinal") spawn root;
     supervisor.analyze_repo(here=root);
 }

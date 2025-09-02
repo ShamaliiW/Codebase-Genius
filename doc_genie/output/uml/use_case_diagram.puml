@@ -1,0 +1,24 @@
+@startuml
+title Use Case Diagram - geveoFinal
+
+actor User
+actor Developer
+actor System
+
+rectangle "geveoFinal" {
+  usecase "Core Functionality" as UC1
+  usecase "Data Processing" as UC2
+  usecase "User Interface" as UC3
+  usecase "API Access" as UC4
+}
+
+User --> UC1
+User --> UC3
+Developer --> UC4
+System --> UC2
+
+UC1 --> UC2
+UC3 --> UC1
+UC4 --> UC2
+
+@enduml
