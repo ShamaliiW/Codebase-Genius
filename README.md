@@ -7,3 +7,6 @@ Agents:
 2. Code Parser Agent – Collects raw code from non-ignored files.
 3. Doc Genie Agent – Generates a descriptive summary explaining the repository’s purpose, components, and functionality.
 4. Supervisor Agent – Orchestrates all agents and aggregates their outputs, producing the final analysis including ignored files, README outline, structure, and summary.
+
+MTP & LLM Integration:
+The system leverages MTP’s language-level abstractions to integrate LLMs seamlessly. Core functions are declared using by llm() (e.g., cleanup_fn, readme_outline_fn, repo_structure_fn), allowing the compiler to automatically generate prompts from function signatures and rich docstrings. This eliminates manual prompt engineering, enabling the agents to behave intelligently and autonomously, interpreting repository contents, extracting structure, and producing human-readable documentation.
