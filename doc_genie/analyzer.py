@@ -97,7 +97,7 @@ class GitHubAPIClient:
         self.headers = {
             "Accept": "application/vnd.github.v3+json",
             "User-Agent": "GitHub-Codebase-Analyzer",
-            "Authorization": f"token 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"
+            "Authorization": f"token {token}"
         }
         
         if self.token:

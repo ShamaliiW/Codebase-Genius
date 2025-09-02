@@ -54,7 +54,7 @@ def run_analyzer(github_url=None, config_file=None):
         cmd = [sys.executable, 'analyzer.py', '--url', github_url or 'https://github.com/DinalieLiyanage/geveoFinal']
         
         # Add token if available
-        github_token = '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'
+        github_token = os.getenv("GITHUB_TOKEN")
         if github_token:
             cmd.extend(['--token', github_token])
         
